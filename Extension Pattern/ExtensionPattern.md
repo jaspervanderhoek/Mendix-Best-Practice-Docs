@@ -29,6 +29,12 @@ Enhance your Core-system by leaving it as standard as possible (or make the mini
 Bring all logic into the extension, this allows for the visibility and flexibilty in all logic.  
 >*When changes are required in the future, only one system needs changing. This limits development effort and regression testing significantly. Any effort rebuilding logic or data structures will be saved later when working on new functionality*
 
+Drive towards future flexibility and value. 
+>*Introduce flexibility in your architecture to allow for future changes and adaptability. This will allow future project to be developed with less effort and faster response but also reduces the maintenance effort since the solution is less complex and less complexity means less work*  
+
+Copy data into your extension application and use it as the system of record for the data for that process. 
+>Copy the data into your extension application and allow the application to manage and enrich this data. Push any updates to the master data back but don't attempt to force having all data in a single place. Use (OData) interfaces for easy retrieve of all data. 
+
 
 
 ## Example
