@@ -52,7 +52,7 @@ Interaction with the UX, opening or closing pages should take place in the Nanof
 
 2. Follow the VLI pattern   
     Process **V**alidation should happen in the Nanoflow, no data needs to be transmitted until it's valid.   
-    Execute all **L**ogic in a Nanoflow that processes small data sets and doesn't impact your security.  
+    Execute all **L**ogic in a Nanoflow that processes small data sets and doesn't impact your security or conflicts with the performance recommendations previously mentioned.  
     **I**nteraction with UX should ideally be placed in the Nanoflows and be annotated if this happens in the microflow.  
 
 [comment]: # "^ Reference to: BP.042"
