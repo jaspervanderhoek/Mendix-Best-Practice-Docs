@@ -1,5 +1,7 @@
 # When to use a Microflow vs a Nanoflow
 
+[comment]: # "Clarification on: BP.040"
+
 **Offline first:** always start with nanoflows.  
 **Online application:** always start with nanoflows.
 
@@ -30,28 +32,36 @@ Conclusion: for actions limit the use of nanoflows to execute logic that applies
 If you are executing logic in a nanoflow all logic is executed client side. While the platform doesn’t allow changes to be made in the nanoflow logic at runtime, there is still an inherent risk with executing logic only client side. A malicious person could always attempt to circumvent the logic and send data straight to the server. For example logic for payment processing should never be executed in a nanoflow to prevent exploitation of the logic. This means that if you are in a highly regulated space or working with financial transactions you more than likely will put more validation and process logic in microflows than when you'd build a simple data entry system with just 1 user role.
 Nanoflows are a secure way of executing logic, however data can be send to the runtime without it passing through the nanoflow and you will need to make sure that your microflows validate enough.
 
-Example: Validating the format and presence of a phone nr can be done in a Nanoflow, while an exploit can cause bad data this will have no impact. Validating and processing the amounts and account numbers in payments or invoices is something you want to do in a microflow to make sure that all logic is securely ran on the server where everything is in your control. 
-
+Example: Validating the format and presence of a phone nr can be done in a Nanoflow, while an exploit can cause bad data this will have no impact. Validating and processing the amounts and account numbers in payments or invoices is something you want to do in a microflow to make sure that all logic is securely ran on the server where everything is in your control.  
+In the first scenario the user already has full control over the data and actions and we just need to make sure to capture accidental mistakes, this is where 100% Nanoflow is a good fit.  
+In the second scenario the user should not be allowed to change everything, the secure changes and activities should happen in a microflow. 
 
 
 ## The best of both worlds: Combining Nanoflows & Microflows
 A Nanoflow is able to call microflows, this way we can use the benefits of both technologies. Knowing the differences between the two technologies we can now design a process that is both fast and secure. 
 
-You can split the logic between a Nanoflow and a Microflow if that creates performance benefits, when splitting your logic make sure you still follow the guideliness on splitting the logic. Don't split logic for the sake of splitting, the logic should support being split as well if it makes the logic harder to understand keep everything in the microflow. 
+At any time when developing your process you should make consious choices and where to place your logic, and you'll have to do the same when choosing between a micro or nano flow. The logic decision must be made primarily by considering the performance difference between a Nanoflow and a Microflow. Additionally, when splitting your logic make sure you still follow the best-practices on organizing and breaking down the logic. Split the logic only if the steps in the process allow for this, if splitting makes the logic harder to understand keep all the logic in a microflow rather than a nanoflow. 
 
 Interaction with the UX, opening or closing pages should take place in the Nanoflows. Attempt to keep the logic and validation separate from the interaction with the workflow. This will make it significantly easier to follow a process through all the logic and allows you to re-use logic more frequently.
+
 
 
 1. Always start with a Nanoflow  
     Exception, if all your Nanoflow is doing is call a microflow and maybe close or open a page, skip the Nanoflow the extra step of a Nanoflow does not have any benefits. 
     
 
-2. Follow the VLI pattern  
+2. Follow the VLI pattern   
     Process **V**alidation should happen in the Nanoflow, no data needs to be transmitted until it's valid.   
     Execute all **L**ogic in a Nanoflow that processes small data sets and doesn't impact your security.  
     **I**nteraction with UX should ideally be placed in the Nanoflows and be annotated if this happens in the microflow.  
 
-3.  
+[comment]: # "^ Reference to: BP.042"
+
+
+3.  Small processes and calculations in Nanoflows while keeping larger retrieves, aggregates and calculations in Microflows. 
+
+4.  Object transformation and storage should happen in Microflows, unless we're only trying to prevent user-error. 
+
 
 
 
