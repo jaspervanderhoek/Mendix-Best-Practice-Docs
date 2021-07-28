@@ -8,6 +8,13 @@ Many of our core systems are in need of change, either because you're buying a s
 ### Reader note
 *This document will talk about Core Systems, Monoliths, and legacy systems. When it comes to extending systems there are no difference between any of these types of systems. The extension pattern that we have identified applies to any large existing systems that you want to customize or enhance. This could even be your large Mendix monolithical system you've build 3 years ago and needs an extension.*
 
+Core sytems such as ERPs never cover the full set of business requirements when buying them off the self, there is always the need for customization to fit the organization. However it is important to be aware of the cost and consequences of these customizations.  
+The more you customize an ERP the more costly upgrades and future changes will become, since large systems will become more expensive to maintain over time.   
+![From Costly Customization](CostlyCustomization.png)
+
+When considering new or changes in workflow it's important to consider your organizational agility and design your workflows in a future proof way. The best way to achieve the most value and flexbility is to take our learnings from Microservices. Using smaller systems dedicated to a specific business process that are easy to create, change or replace.    
+![To Future-proof extension](FutureProofExtension.png)
+
 
 ## Criteria
 * Business Value 
@@ -19,11 +26,13 @@ Many of our core systems are in need of change, either because you're buying a s
 
 
 
+
+##TODO Write better explanation and business case on why this pattern is relevant and how it aligns with Criteria
+
+
 ## Common Anti-Patterns 
 In our software career we've been drilled to re-use everything and get the largest ROI out of our previous investments. It's very common that organizations are looking to get all their moneys worth out of that multi-million dollar investment of their Core system.  
 As a result the system should re-use any of the data and logic that is already in the existing system. This is the most common anti-pattern. **Do not re-use your logic and data storage**, this will restrict you in your future ability to maintain or enhance this process.
-
-##TODO Write better explanation and business case on why this pattern is relevant and how it aligns with Criteria
 
 
 
@@ -46,6 +55,9 @@ Data exchange between Core and Extension should be limited to milestone stages o
 
 Don't create complex data synchronization and merging algorithms. 
 >*Consider the following, if users have to interact with and approve data in the Extension but somehow the Core system is able to change the record that is being approved. How can you still rely on the approval being valid. If bi-directional data changes are unpreventable solve this in the workflow rather than the technology, for example: ask the user for a re-approval and highlight the changed fields rather than having complex automatic merge algorithms.*
+
+Apply Microservice principles where possible but accept the need to drop some requirements
+>*When building Core extensions it's likely to find the need to develop tightly coupled integrations. For example: Core systems frequently don't have well defined functional APIs. Accept the restrictions that come with the extension and apply Microservice principles where possible but identify and accept where it's not.*
 
 
 ## Example: Order Approval
