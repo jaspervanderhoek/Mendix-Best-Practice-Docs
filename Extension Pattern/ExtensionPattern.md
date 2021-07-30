@@ -41,7 +41,7 @@ As a result the system should re-use any of the data and logic that is already i
 Enhance your Core-system by leaving it as standard as possible (or make the minimal amount of changes).  
 >*By limiting work in the core-system there are less to no chances on regression issues. Future upgrades will be significantly faster because of the lack of customization.*  
 
-Bring all logic into the extension, this allows for the visibility and flexibilty in all logic.  
+Bring all logic into the extension, this allows for the visibility and flexibility in all logic.  
 >*When changes are required in the future, only one system needs changing. This limits development effort and regression testing significantly. Any effort rebuilding logic or data structures will be saved later when working on new functionality*
 
 Drive towards future flexibility and value. 
@@ -54,7 +54,10 @@ Data exchange between Core and Extension should be limited to milestone stages o
 >*The same data will live in two systems, but it's important to not design the system to have perfect consistency at any given time since that will drastically complicate the solution. Aim to build in certain 'milestones' into the workflow during which data is brought in sync between the two systems. Define which system is leading during what stage to address data discrepencies. This needs to be a simple clear reference list somewhere in the system's documentation.*
 
 Don't create complex data synchronization and merging algorithms. 
->*Consider the following, if users have to interact with and approve data in the Extension but somehow the Core system is able to change the record that is being approved. How can you still rely on the approval being valid. If bi-directional data changes are unpreventable solve this in the workflow rather than the technology, for example: ask the user for a re-approval and highlight the changed fields rather than having complex automatic merge algorithms.*
+>*Apply the Staging Pattern for data synchronization. Consider the following, if users have to interact with and approve data in the Extension but somehow the Core system is able to change the record that is being approved. How can you still rely on the approval being valid. If bi-directional data changes are unpreventable solve this in the workflow rather than the technology, for example: ask the user for a re-approval and highlight the changed fields rather than having complex automatic merge algorithms.*
+
+[comment]: # "^ Reference to: BP.082"
+
 
 Apply Microservice principles where possible but accept the need to drop some requirements
 >*When building Core extensions it's likely to find the need to develop tightly coupled integrations. For example: Core systems frequently don't have well defined functional APIs. Accept the restrictions that come with the extension and apply Microservice principles where possible but identify and accept where it's not.*
